@@ -1,0 +1,16 @@
+ESTRUCTURA: un solo scroll. Bingo y Cupones se abren como hojas a pantalla completa desde su tarjeta (se cierran con la flecha ‹). La música está dentro del scroll, con vinilo y 8 canciones.
+FOTOS (carpeta img/, formato .webp, menos de 400 KB cada una). Las que falten muestran un marcador.
+  cabina-1 ... cabina-4        (tira de la portada, 4 fotos verticales, con sello de lacre)
+  historia-1, historia-2       (Antes y Septiembre)
+  tele-1, tele-2, tele-3       (la tele: canal 10 Pichilemu, canal 11 FOTO DE USTEDES, canal 12 a elección)
+  viajes (2 por viaje): pichilemu, santiago, argentina, eeuu, iquique-1, mejillones, el-salvador, iquique-2  ->  <nombre>-1.webp y <nombre>-2.webp
+  galeria-1 ... galeria-8      (tablero enmarcado: 1-4 tira de película, 5 y 6 polaroids, 7 y 8 relicarios en forma de corazón)
+  naipe-1 ... naipe-8          (fotos de ustedes para la baraja; verticales, tipo retrato; se ven en blanco y negro)
+  vinilo                       (centro del disco)
+MÚSICA (carpeta audio/): cancion-1.mp3 ... cancion-8.mp3
+TEXTOS, CARTAS, ASIENTOS, BINGO Y CUPONES: arriba de script.js. Los colores de fondo de cada sección están en index.html (data-bg) y los estampados en las clases pat-* de cada sección.
+BINGO: al completar los 9 corazones se desbloquea un cupón secreto. CALENDARIO: toca el corazón del 13 de noviembre (cualquier año).
+Los cupones canjeados y el bingo completado se guardan en el navegador del dispositivo donde se abra el sitio.
+Para verlo, abre index.html con Live Server (VS Code).
+PROBAR DESDE CERO: abre index.html?reset (borra en ese dispositivo los cupones canjeados y el bingo completado).
+Al canjear un cupón aparece un aviso con "Deshacer" durante 7 segundos.

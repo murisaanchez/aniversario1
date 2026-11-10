@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4B0E19">
+<title>3 años</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Permanent+Marker&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="rev" viewBox="0 0 100 100"><g transform="rotate(-40 50 50)" stroke="#111" stroke-width="3.5" stroke-linejoin="round" fill="currentColor"><polygon points="12,22 54,22 54,8 86,31 54,54 54,40 12,40"/><polygon points="88,62 46,62 46,48 14,71 46,94 46,80 88,80"/></g></symbol>
+  <symbol id="avion" viewBox="0 0 24 24"><path d="M3 11 21 3l-6 18-4-8z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></symbol>
+</svg>
+
+<button id="mini" aria-label="Pausar música" hidden>❚❚</button>
+
+<main class="app">
+<div id="v-inicio">
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">13 · 11 · 2026</p>
+      <h1>Tres<br>años.</h1>
+      <p class="sub">Un archivo de lo que hemos recorrido.</p>
+    </div>
+    <div class="cabina" aria-hidden="true">
+      <div class="f"><img src="img/cabina-1.webp" alt="" onerror="this.remove()"></div>
+      <div class="f"><img src="img/cabina-2.webp" alt="" onerror="this.remove()"></div>
+      <div class="f"><img src="img/cabina-3.webp" alt="" onerror="this.remove()"></div>
+      <div class="f"><img src="img/cabina-4.webp" alt="" onerror="this.remove()"></div>
+    </div>
+  </header>
+
+  <section class="sec center pat-pin" id="s-carta" data-bg="#4B0E19">
+    <p class="eyebrow">ANTES DE EMPEZAR</p>
+    <button class="uno" id="uno2" aria-pressed="false" aria-label="Dar vuelta la carta">
+      <span class="cara dorso"><span>Toca la carta</span></span>
+      <span class="cara frente ucard" data-uno="¿Vamos por el año 4?" style="--c:#B3342A"></span>
+    </button>
+  </section>
+
+  <section class="sec center pat-azul" id="s-intro" data-bg="#F6F2EA">
+    <p class="eyebrow">13 DE NOVIEMBRE</p>
+    <p class="lede rv">Tres años, ordenados en un solo lugar.</p>
+    <div class="cal rv" id="cal-wrap">
+      <div class="cal-head"><button id="cal-prev" aria-label="Mes anterior">‹</button><b id="cal-title"></b><button id="cal-next" aria-label="Mes siguiente">›</button></div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <p class="cal-cap" id="cal-cap"></p>
+      <div class="cal-dias" id="cal-dias" hidden></div>
+    </div>
+    <p class="mono-hint on-light">Recorre los meses. Toca el corazón.</p>
+  </section>
+
+  <section class="sec pat-rojo" id="s-historia" data-bg="#EEE7DA">
+    <p class="eyebrow">COMO PARTIÓ</p>
+    <h2>Antes de ser nosotros</h2>
+    <div class="tl">
+      <article class="cap2 rv"><p class="k">Antes</p><h3>Mismas aguas</h3><p>Un grupo de amigos. Nada que anunciar.</p>
+        <figure class="ph bn"><img src="img/historia-1.webp" alt="" onerror="this.remove()"></figure></article>
+      <article class="cap2 rv"><p class="k">Septiembre</p><h3>Menos gente</h3><p>Los planes dejaron de ser de todos.</p>
+        <figure class="ph bn"><img src="img/historia-2.webp" alt="" onerror="this.remove()"></figure></article>
+    </div>
+  </section>
+
+  <section class="sec center" id="s-tv" data-bg="#14100F">
+    <p class="eyebrow">OCTUBRE</p>
+    <h2>Salimos al aire</h2>
+    <div class="tvwrap rv">
+      <div class="antena" aria-hidden="true"></div>
+      <div class="tvbody">
+        <div class="tvrow">
+          <button class="screen" id="screen" aria-label="Cambiar de canal">
+            <span class="nosig">TU FOTO AQUÍ</span>
+            <span class="canal" id="canal">CH 10</span><span class="envivo">● EN VIVO</span>
+            <span class="tick"><span id="tick"></span></span>
+            <span class="estatica" id="estatica"></span>
+          </button>
+          <div class="ctrl" aria-hidden="true"><i class="knob"></i><i class="knob k2"></i><i class="grille"></i></div>
+        </div>
+      </div>
+      <p class="mono-hint">Toca la pantalla para cambiar de canal</p>
+    </div>
+    <p class="rv narrow">Ya no era casual. Y en Pichilemu, olas, una cámara y varias miradas. Ahí lo supieron todos.</p>
+  </section>
+
+  <section class="sec center pat-you" id="s-nov" data-bg="#F6F2EA">
+    <h2 class="wg mes">Noviembre</h2>
+    <p class="y-al-fin rv">Y al fin llegó…</p>
+    <button class="uno" id="uno1" aria-pressed="false" aria-label="Dar vuelta la carta verde">
+      <span class="cara dorso"><span>Toca la carta</span></span>
+      <span class="cara frente ucard" data-uno="¿Quieres ser mi novia?" style="--c:#2E8B4F"></span>
+    </button>
+  </section>
+
+  <section class="sec center pat-pin" id="s-bingo" data-bg="#4B0E19">
+    <p class="eyebrow">JUEGO</p>
+    <h2 class="wg">¿Jugamos?</h2>
+    <p class="narrow">Nueve corazones. Cada uno guarda algo.</p>
+    <div class="fichas" id="fichas" aria-hidden="true"></div>
+    <button class="cta" data-sheet="bingo">Jugar al bingo <span>→</span></button>
+  </section>
+
+  <section class="sec pat-fino" id="s-viajes" data-bg="#F6F2EA">
+    <p class="eyebrow">VIAJES</p>
+    <h2>Dónde hemos estado</h2>
+    <div class="stats rv" id="stats"></div>
+    <div class="ruta" id="ruta"><div class="via2" id="via"><i class="fill" id="fill"></i></div><p class="cur" id="cur"></p></div>
+    <div id="viajes"></div>
+  </section>
+
+  <section class="sec center" id="s-musica" data-bg="#14100F">
+    <p class="eyebrow">LADO A</p>
+    <h2>Nuestra playlist</h2>
+    <div class="toca" id="disco">
+      <div class="vinilo"><div class="etiqueta"><img src="img/vinilo.webp" alt="" onerror="this.remove()"></div></div>
+      <span class="brazo"></span>
+    </div>
+    <p class="np"><b id="np-t">Elige una canción</b><span id="np-a"></span></p>
+    <div class="prog" aria-hidden="true"><i id="pbar"></i></div>
+    <button class="play" id="play" aria-label="Reproducir">▶</button>
+    <p class="aviso" id="np-msg" aria-live="polite"></p>
+    <ol id="tracks"></ol>
+  </section>
+
+  <section class="sec center pat-fino" id="s-fotos" data-bg="#EEE7DA">
+    <p class="eyebrow">FOTOS</p>
+    <h2>Nosotros</h2>
+    <svg class="colgante" viewBox="0 0 340 46" aria-hidden="true"><circle cx="170" cy="6" r="6" fill="#B58A3C"/><path d="M170 6 L36 46 M170 6 L304 46" stroke="#A58449" stroke-width="2" stroke-dasharray="3 3" fill="none"/></svg>
+    <div class="marco"><div class="tablero" id="tablero"></div></div>
+  </section>
+
+  <section class="sec center pat-love" id="s-cupones" data-bg="#F6F2EA">
+    <p class="eyebrow">VALES</p>
+    <h2 class="wg">Cupones</h2>
+    <p class="narrow fuerte">Seis vales, sin fecha de vencimiento.</p>
+    <p class="mono-hint on-light" id="cup-extra">Hay uno escondido en el bingo.</p>
+    <div class="abanico" id="abanico" aria-hidden="true"></div>
+    <button class="cta" data-sheet="cupones">Ver los cupones <span>→</span></button>
+  </section>
+
+  <section class="sec center pat-tela" id="s-baraja" data-bg="#6E1423">
+    <p class="eyebrow">NUESTRA BARAJA</p>
+    <h2>Ocho cartas y una</h2>
+    <div class="mesa" id="mesa"></div>
+  </section>
+
+  <section class="sec center pat-azul" id="s-cartas" data-bg="#EEE7DA">
+    <p class="eyebrow">CARTAS</p>
+    <h2 class="rotulo">Para abrir</h2>
+    <p class="narrow">Toca un sobre.</p>
+    <div class="sobres" id="sobres"></div>
+  </section>
+
+  <section class="sec center fin pat-love" id="s-fin" data-bg="#14100F">
+    <h2 class="wg grande">Seguimos.</h2>
+    <p class="fecha-fin">13 · 11 · 2026</p>
+    <button class="cta" id="arriba">Volver al inicio <span>↑</span></button>
+  </section>
+</div>
+</main>
+
+<div class="sheet vinoh" id="sh-bingo" hidden role="dialog" aria-modal="true" aria-label="Bingo"><div class="in">
+  <div class="sheet-bar"><button data-close aria-label="Volver">‹</button><b>Bingo</b></div>
+  <p class="eyebrow dk">JUEGO</p>
+  <h2>Marca lo que ya hicimos</h2>
+  <p class="lede">Cada corazón guarda algo.</p>
+  <div id="bingo" class="bingo"></div>
+  <p class="cuenta" id="bingo-n">0 de 9</p>
+  <p class="bingo-nota" id="bingo-nota" aria-live="polite">Toca un corazón.</p>
+</div>
+<div class="bingo-fin" id="bingo-fin" hidden><div>
+  <h2>Bingo.</h2>
+  <p>Lo que falta, lo hacemos juntos.</p>
+  <div class="rasca"><div class="premio"><small>PREMIO</small><b>Cupón sorpresa</b><span>Un deseo a elección. Sin preguntas.</span></div><canvas id="rasca-cv" aria-label="Tarjeta para raspar"></canvas></div>
+  <p class="mono-hint" id="rasca-nota">Raspa la tarjeta.</p>
+  <button class="link" id="fin-seguir">Seguir</button>
+</div></div></div>
+
+<div class="sheet" id="sh-cupones" hidden role="dialog" aria-modal="true" aria-label="Cupones"><div class="in">
+  <div class="sheet-bar"><button data-close aria-label="Volver">‹</button><b>Cupones</b></div>
+  <p class="eyebrow dk">VALES</p>
+  <h2>Tus vales</h2>
+  <p class="lede">Sin fecha de vencimiento. Cada uno se canjea una sola vez.</p>
+  <div id="cupones"></div>
+</div></div>
+
+<div id="ov" hidden><div class="hoja2" id="hoja2" role="dialog" aria-modal="true" aria-label="Carta"><div id="hoja-txt"></div></div><button id="cerrar">Cerrar</button></div>
+
+<div id="lb" hidden>
+  <button id="lb-x" aria-label="Cerrar">×</button>
+  <img alt="">
+  <div class="lb-bar"><button id="lb-p" aria-label="Anterior">‹</button><span id="lb-n"></span><button id="lb-s" aria-label="Siguiente">›</button></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
