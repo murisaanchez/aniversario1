@@ -5,17 +5,17 @@ const VIAJES = [
   { slug: "santiago", lugar: "Santiago", fecha: "Verano 2024", motivo: "Paseo", vuelo: "SUP 014", puerta: "B5", asiento: "7C · 7D" },
   { slug: "argentina", lugar: "Argentina", fecha: "Mayo 2024", motivo: "Camp de SUP", vuelo: "SUP 027", puerta: "C1", asiento: "21E · 21F" },
   { slug: "eeuu", lugar: "Estados Unidos", fecha: "Nov 2024", motivo: "Primer mundial", vuelo: "SUP 038", puerta: "D9", asiento: "3A · 3B" },
-  { slug: "iquique-1", lugar: "Iquique", fecha: "Abr 2025", motivo: "Competencia", vuelo: "SUP 046", puerta: "A7", asiento: "15C · 15D" },
+  { slug: "iquique-1.1", lugar: "Iquique", fecha: "Abr 2025", motivo: "Competencia", vuelo: "SUP 046", puerta: "A7", asiento: "15C · 15D" },
   { slug: "mejillones", lugar: "Mejillones", fecha: "Oct 2025", motivo: "Competencia", vuelo: "SUP 059", puerta: "B3", asiento: "9A · 9B" },
   { slug: "el-salvador", lugar: "El Salvador", fecha: "Nov 2025", motivo: "Segundo mundial", vuelo: "SUP 063", puerta: "E4", asiento: "18E · 18F" },
-  { slug: "iquique-2", lugar: "Iquique", fecha: "Abr 2026", motivo: "Competencia", vuelo: "SUP 072", puerta: "C8", asiento: "5C · 5D" }
+  { slug: "iquique-2.1", lugar: "Iquique", fecha: "Abr 2026", motivo: "Competencia", vuelo: "SUP 072", puerta: "C8", asiento: "5C · 5D" }
 ];
 const PAISES = 4, MUNDIALES = 2;
 const BINGO = [
   { t: "Salir en la tele", c: "Pichilemu, octubre de 2023." },
-  { t: "UNO en la playa", c: "Una carta verde, una pregunta." },
+  { t: "Hacer galletas de jengibre", c: "Un fail mas de casita navideña." },
   { t: "Dos mundiales", c: "Estados Unidos y El Salvador." },
-  { t: "Iquique ×2", c: "Abril de 2025 y abril de 2026." },
+  { t: "Ir al cine x20 veces", c: "Chanchear mucho viendo pelis." },
   { t: "Camp en Argentina", c: "Mayo de 2024." },
   { t: "Surfear juntos", c: "Las olas de Pichilemu." },
   { t: "Mejillones", c: "Octubre de 2025." },
