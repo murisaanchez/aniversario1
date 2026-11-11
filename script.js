@@ -58,6 +58,21 @@ const CUPONES = [
 /* ========================= */
 
 document.documentElement.classList.add("js");
+// Tus fotos pueden ser .webp, .jpg, .jpeg o .png (con el mismo nombre): si una no existe, prueba la siguiente extensión
+const EXTS = [".webp", ".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG"];
+const EXT_RE = /\.(webp|jpe?g|png)(\?.*)?$/i;
+addEventListener("error", (e) => {
+  const im = e.target;
+  if (!(im instanceof HTMLImageElement) || !/\/img\//.test(im.src) || !EXT_RE.test(im.src)) return;
+  const k = +(im.dataset.k || 0) + 1;
+  if (k < EXTS.length) { e.stopImmediatePropagation(); im.dataset.k = k; im.src = im.src.replace(EXT_RE, EXTS[k]); }
+}, true);
+function carga(src, ok) {
+  let k = 0; const im = new Image(); im.alt = "";
+  im.onload = () => ok(im);
+  im.onerror = () => { if (++k < EXTS.length) im.src = src.replace(EXT_RE, EXTS[k]); };
+  im.src = src;
+}
 // Para volver a probar desde cero en tu dispositivo: abre index.html?reset
 if (location.search.includes("reset")) { try { ["bingo", "bingo2", "cupones", "cupones2"].forEach(k => localStorage.removeItem(k)); } catch (e) {} }
 const $ = (id) => document.getElementById(id);
@@ -144,9 +159,7 @@ function canal(i, anim) {
   $("tick").textContent = (c.tick + " · ").repeat(3);
   if (anim && !REDUCE) { const e = $("estatica"); e.classList.remove("on"); void e.offsetWidth; e.classList.add("on"); }
   s.querySelectorAll("img").forEach(im => im.remove());
-  const im = new Image(); im.alt = "";
-  im.onload = () => { if (my === tok) s.prepend(im); };
-  im.src = `img/tele-${i + 1}.webp`;
+  carga(`img/tele-${i + 1}.webp`, (im) => { if (my === tok) s.prepend(im); });
 }
 $("screen").onclick = () => { tc = (tc + 1) % CANALES.length; canal(tc, true); vib(8); };
 canal(0, false);
@@ -196,7 +209,7 @@ let lista = [], li = 0;
 const swipe = (el, fn) => { let x0 = null; el.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
   el.addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 45) fn(dx < 0 ? 1 : -1); x0 = null; }, { passive: true }); };
 function visor(l, i) { lista = l; li = i; muestra(); $("lb").hidden = false; }
-function muestra() { $("lb").querySelector("img").src = lista[li]; $("lb-n").textContent = `${li + 1} / ${lista.length}`; }
+function muestra() { const im = $("lb").querySelector("img"); delete im.dataset.k; im.src = lista[li]; $("lb-n").textContent = `${li + 1} / ${lista.length}`; }
 const lbMueve = (d) => { li = (li + d + lista.length) % lista.length; muestra(); };
 $("lb-p").onclick = () => lbMueve(-1); $("lb-s").onclick = () => lbMueve(1); $("lb-x").onclick = () => { $("lb").hidden = true; };
 swipe($("lb"), lbMueve);

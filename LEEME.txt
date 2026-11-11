@@ -1,5 +1,5 @@
 ESTRUCTURA: un solo scroll. Bingo y Cupones se abren como hojas a pantalla completa desde su tarjeta (se cierran con la flecha ‹). La música está dentro del scroll, con vinilo y 8 canciones.
-FOTOS (carpeta img/, formato .webp, menos de 400 KB cada una). Las que falten muestran un marcador.
+FOTOS (carpeta img/). Sirven .webp, .jpg, .jpeg o .png con el mismo nombre que aparece abajo (sin la extensión). Ideal: unos 1200 px de ancho y menos de 400 KB cada una. Las que falten muestran un marcador.
   cabina-1 ... cabina-4        (tira de la portada, 4 fotos verticales, con sello de lacre)
   historia-1, historia-2       (Antes y Septiembre)
   tele-1, tele-2, tele-3       (la tele: canal 10 Pichilemu, canal 11 FOTO DE USTEDES, canal 12 a elección)
@@ -14,3 +14,4 @@ Los cupones canjeados y el bingo completado se guardan en el navegador del dispo
 Para verlo, abre index.html con Live Server (VS Code).
 PROBAR DESDE CERO: abre index.html?reset (borra en ese dispositivo los cupones canjeados y el bingo completado).
 Al canjear un cupón aparece un aviso con "Deshacer" durante 7 segundos.
+CARTAS: en script.js busca LETRAS. Cada carta tiene lbl (lo que dice el sobre), t (título), b (los párrafos, entre comillas y separados por comas) y f (la firma).

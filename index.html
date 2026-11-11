@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#4B0E19">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <title>3 años</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,9 +168,8 @@
 
 <div class="sheet vinoh" id="sh-bingo" hidden role="dialog" aria-modal="true" aria-label="Bingo"><div class="in">
   <div class="sheet-bar"><button data-close aria-label="Volver">‹</button><b>Bingo</b></div>
-  <p class="eyebrow dk">JUEGO</p>
-  <h2>Marca lo que ya hicimos</h2>
-  <p class="lede">Cada corazón guarda algo.</p>
+  <h2 class="h-bingo">Bingo</h2>
+  <p class="sub-b">Marca lo que ya hicimos. Cada corazón guarda algo.</p>
   <div id="bingo" class="bingo"></div>
   <p class="cuenta" id="bingo-n">0 de 9</p>
   <p class="bingo-nota" id="bingo-nota" aria-live="polite">Toca un corazón.</p>
@@ -195,6 +197,7 @@
   <img alt="">
   <div class="lb-bar"><button id="lb-p" aria-label="Anterior">‹</button><span id="lb-n"></span><button id="lb-s" aria-label="Siguiente">›</button></div>
 </div>
+<div id="gira" aria-hidden="true">Gira tu teléfono para verlo en vertical</div>
 <script src="script.js"></script>
 </body>
 </html>

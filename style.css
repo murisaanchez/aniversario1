@@ -265,7 +265,7 @@ p{margin:0 0 1rem}
 .cupon.done::after{content:"CANJEADO";position:absolute;right:12px;top:12px;rotate:8deg;border:2px solid var(--rojo);color:var(--rojo);font:500 .68rem var(--mono);letter-spacing:.14em;padding:.15rem .5rem;border-radius:4px}
 
 /* Hojas a pantalla completa: bingo y cupones */
-.sheet{position:fixed;inset:0;z-index:75;background:var(--bg);overflow:auto;animation:sube .4s cubic-bezier(.2,.8,.2,1) both}
+.sheet{position:fixed;top:0;bottom:0;left:max(0px,calc(50% - 240px));width:min(480px,100%);z-index:75;background:var(--bg);overflow:auto;overscroll-behavior:contain;animation:sube .4s cubic-bezier(.2,.8,.2,1) both}
 @keyframes sube{from{transform:translateY(40px);opacity:0}}
 .sheet .in{max-width:480px;margin:0 auto;padding:0 20px 64px}
 .sheet-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:14px;padding:max(14px,env(safe-area-inset-top)) 0 14px;margin-bottom:28px;background:var(--bg);border-bottom:1px solid var(--line)}
@@ -358,14 +358,14 @@ p{margin:0 0 1rem}
 .sheet.vinoh .sheet-bar b,.sheet.vinoh h2,.sheet.vinoh .lede{color:var(--crema)}
 .sheet.vinoh .eyebrow{color:#D9C8AC;opacity:1}
 .bingo{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:380px;margin:1.6rem auto 0}
-.corazon{all:unset;cursor:pointer;position:relative;aspect-ratio:1/.94;display:grid;place-items:center;text-align:center;padding:26% 21% 24%;background:var(--h-cream) center/108% no-repeat;font:700 clamp(.62rem,2.9vw,.74rem)/1.12 var(--head);color:var(--vino);overflow-wrap:anywhere;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4));transition:scale .2s}
+.corazon{all:unset;cursor:pointer;position:relative;aspect-ratio:1/.94;display:grid;place-items:center;text-align:center;padding:24% 17% 21%;background:var(--h-cream) center/108% no-repeat;font:700 clamp(.66rem,3.1vw,.8rem)/1.12 var(--head);color:var(--vino);overflow-wrap:anywhere;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4));transition:scale .2s}
 .corazon:active{scale:.94}
 .corazon[aria-pressed="true"]{background-image:var(--h-red);color:#fff;scale:1.04;animation:pop .45s}
 @keyframes pop{0%{scale:1}40%{scale:1.22}100%{scale:1.04}}
 .corazon:focus-visible{outline:2px solid var(--crema);outline-offset:2px}
 .bingo-nota{position:sticky;bottom:max(14px,env(safe-area-inset-bottom));z-index:5;margin:1.4rem 0 0;padding:14px 16px;border-radius:16px;background:#2E0911;border:1px solid rgba(246,242,234,.22);box-shadow:0 10px 24px rgba(0,0,0,.45);text-align:center;font:italic 500 1.1rem/1.4 var(--lit);color:var(--crema);min-height:3.6rem;display:grid;place-items:center}
 .sheet.vinoh .cuenta{color:#D9C8AC;text-align:center;margin-top:1rem}
-.bingo-fin{position:fixed;inset:0;z-index:6;background:rgba(55,10,20,.96);display:grid;place-items:center;text-align:center;padding:24px;color:var(--crema);animation:velo .4s both}
+.bingo-fin{position:fixed;top:0;bottom:0;left:max(0px,calc(50% - 240px));width:min(480px,100%);z-index:6;background:rgba(55,10,20,.96);display:grid;place-items:center;text-align:center;padding:24px;color:var(--crema);animation:velo .4s both}
 .bingo-fin h2{font-size:clamp(3.4rem,18vw,5rem);letter-spacing:-.04em;margin-bottom:.8rem;padding:0;border:0}
 .bingo-fin .cta{margin-top:1.4rem}
 .link{all:unset;display:block;cursor:pointer;margin:1.2rem auto 0;color:var(--crema);font:600 .88rem var(--head);text-decoration:underline;text-underline-offset:4px;opacity:.8}
@@ -405,3 +405,41 @@ p{margin:0 0 1rem}
 .cupon button{height:44px}
 .bingo{padding-bottom:4px}
 @media (max-width:380px){.cupon{grid-template-columns:54px 1fr}.cupon h3{font-size:1.02rem}.cupon .cuerpo{padding:14px 12px}}
+
+/* ===== Todo dentro de la columna del celular (también en el computador) ===== */
+#ov,#lb{left:max(0px,calc(50% - 240px));right:auto;width:min(480px,100%)}
+
+/* ===== Bingo compacto: cabe en una pantalla de celular ===== */
+.h-bingo{font-size:clamp(1.8rem,8vw,2.2rem);margin:0 0 .3rem;border:0;padding:0}
+.sub-b{font-size:.9rem;line-height:1.45;margin:0 0 .4rem;color:var(--crema);opacity:.85}
+.sheet.vinoh .sheet-bar{margin-bottom:14px}
+.sheet.vinoh .bingo{width:min(100%,max(270px,calc((100dvh - 330px)/.94)));max-width:420px;margin:.8rem auto 0}
+.sheet.vinoh .cuenta{margin:.8rem 0 0}
+.sheet.vinoh .bingo-nota{margin-top:.9rem}
+
+/* ===== Bingo: tamaño ajustable (cambia --bingo-w para hacerlo más grande o más chico) ===== */
+.sheet.vinoh{--bingo-w:300px}
+.sheet.vinoh .bingo{container-type:inline-size;width:min(100%,var(--bingo-w),max(220px,calc((100dvh - 400px)/.94)));max-width:none;margin:.6rem auto 0}
+.sheet.vinoh .corazon{font-size:clamp(.62rem,3.7cqw,.8rem)}
+.sheet.vinoh .in{padding-bottom:24px}
+.sheet.vinoh .bingo-nota{font-size:1rem;padding:12px 14px;min-height:3.2rem;margin-top:.8rem}
+
+/* ===== Bingo: más espacio entre corazones y frases ===== */
+.sheet.vinoh .bingo{gap:14px 10px;padding:8px 6px 12px;margin-bottom:0}
+.sheet.vinoh .corazon{background-size:100%;aspect-ratio:1/.92;padding:25% 18% 22%;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+.sheet.vinoh .corazon[aria-pressed="true"]{scale:1;z-index:2;animation:pop2 .45s}
+@keyframes pop2{0%{scale:1}40%{scale:1.12}100%{scale:1}}
+.sheet.vinoh .cuenta{margin-top:1.6rem}
+.sheet.vinoh .bingo-nota{margin-top:1.1rem}
+@media (prefers-reduced-motion:reduce){.sheet.vinoh .corazon[aria-pressed="true"]{animation:none}}
+
+/* ===== Pensado para iPhone 15 (393 × 852) ===== */
+button,a,.uno,.sobre2,.corazon,.flip,.screen{touch-action:manipulation}
+.app{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+.hero{padding-top:max(64px,calc(env(safe-area-inset-top) + 40px))}
+.sec.fin{padding-bottom:max(120px,calc(env(safe-area-inset-bottom) + 100px))}
+.sheet .in{padding-bottom:max(24px,calc(env(safe-area-inset-bottom) + 12px))}
+#gira{display:none}
+@media (orientation:landscape) and (max-height:520px){
+  #gira{position:fixed;inset:0;z-index:200;background:#14100F;color:#F6F2EA;display:grid;place-items:center;text-align:center;padding:24px;font:700 1.1rem var(--head)}
+}
