@@ -2,13 +2,14 @@
 // Fotos de cada viaje: img/<slug>-1.webp e img/<slug>-2.webp
 const VIAJES = [
   { slug: "pichilemu", lugar: "Pichilemu", fecha: "Oct 2023", motivo: "Primer viaje", vuelo: "SUP 001", puerta: "A2", asiento: "12A · 12B" },
+  { slug: "bahia-inglesa", otros: ["bahía-inglesa", "bahia inglesa", "bahía inglesa"], lugar: "Bahía Inglesa", fecha: "Verano 2024", motivo: "Viaje", vuelo: "SUP 008", puerta: "B1", asiento: "16C · 16D" },
   { slug: "santiago", lugar: "Santiago", fecha: "Verano 2024", motivo: "Paseo", vuelo: "SUP 014", puerta: "B5", asiento: "7C · 7D" },
   { slug: "argentina", lugar: "Argentina", fecha: "Mayo 2024", motivo: "Camp de SUP", vuelo: "SUP 027", puerta: "C1", asiento: "21E · 21F" },
   { slug: "eeuu", lugar: "Estados Unidos", fecha: "Nov 2024", motivo: "Primer mundial", vuelo: "SUP 038", puerta: "D9", asiento: "3A · 3B" },
-  { slug: "iquique-1.1", lugar: "Iquique", fecha: "Abr 2025", motivo: "Segundo Nacional 2025", vuelo: "SUP 046", puerta: "A7", asiento: "15C · 15D" },
+  { slug: "iquique-1", fotos: ["iquique-1.1", "iquique-1.2"], lugar: "Iquique", fecha: "Abr 2025", motivo: "Segundo Nacional 2025", vuelo: "SUP 046", puerta: "A7", asiento: "15C · 15D" },
   { slug: "mejillones", lugar: "Mejillones", fecha: "Oct 2025", motivo: "Penultimo Nacional 2025", vuelo: "SUP 059", puerta: "B3", asiento: "9A · 9B" },
   { slug: "el-salvador", lugar: "El Salvador", fecha: "Nov 2025", motivo: "Segundo mundial", vuelo: "SUP 063", puerta: "E4", asiento: "18E · 18F" },
-  { slug: "iquique-2.1", lugar: "Iquique", fecha: "Abr 2026", motivo: "Primer Nacional 2026", vuelo: "SUP 072", puerta: "C8", asiento: "5C · 5D" }
+  { slug: "iquique-2", fotos: ["iquique-2.1", "iquique-2.2"], lugar: "Iquique", fecha: "Abr 2026", motivo: "Primer Nacional 2026", vuelo: "SUP 072", puerta: "C8", asiento: "5C · 5D" }
 ];
 const PAISES = 4, MUNDIALES = 2;
 const BINGO = [
@@ -63,19 +64,42 @@ addEventListener("error", (e) => {
   const im = e.target;
   if (!(im instanceof HTMLImageElement) || !/\/img\//.test(im.src) || !EXT_RE.test(im.src)) return;
   const k = +(im.dataset.k || 0) + 1;
-  if (k < EXTS.length) { e.stopImmediatePropagation(); im.dataset.k = k; im.src = im.src.replace(EXT_RE, EXTS[k]); }
+  if (k < (+im.dataset.lim || EXTS.length)) { e.stopImmediatePropagation(); im.dataset.k = k; im.src = im.src.replace(EXT_RE, EXTS[k]); return; }
+  const alts = (im.dataset.alts || "").split("|").filter(Boolean);   // otros nombres posibles para la misma foto
+  if (alts.length) { e.stopImmediatePropagation(); const sig = alts.shift(); im.dataset.alts = alts.join("|"); im.dataset.k = 0; im.dataset.lim = 4; im.src = sig + ".webp"; }
 }, true);
+// Fotos: aparecen con un suave fundido y, cuando carga lo principal, se bajan las demás en segundo plano
+// (el evento "load" de las fotos solo llega por "document", no por "window")
+document.addEventListener("load", (e) => { if (e.target instanceof HTMLImageElement) e.target.classList.add("ok"); }, true);
+// Seguro extra: durante los primeros 20 segundos, cualquier foto ya cargada se muestra aunque se haya perdido el aviso
+let barridos = 0;
+const barre = setInterval(() => { document.querySelectorAll("img:not(.ok)").forEach(i => { if (i.complete && i.naturalWidth) i.classList.add("ok"); }); if (++barridos > 40) clearInterval(barre); }, 500);
+document.querySelectorAll("img").forEach(i => { i.decoding = "async"; if (!i.getAttribute("loading")) i.loading = "lazy"; if (i.complete && i.naturalWidth) i.classList.add("ok"); });
+addEventListener("load", () => setTimeout(() => document.querySelectorAll('img[loading="lazy"]').forEach(i => { i.loading = "eager"; }), 1500));
 function carga(src, ok) {
   let k = 0; const im = new Image(); im.alt = "";
-  im.onload = () => ok(im);
+  im.onload = () => { im.classList.add("ok"); ok(im); };
   im.onerror = () => { if (++k < EXTS.length) im.src = src.replace(EXT_RE, EXTS[k]); };
   im.src = src;
 }
+// Si el navegador descartó una foto escrita en el HTML antes de que cargara este script (pasa cuando la red va lenta
+// o la foto no es .webp), se vuelve a buscar con otras extensiones: portada, historia y el centro del vinilo
+function reponer(hueco, base) {
+  if (!hueco || hueco.querySelector("img")) return;
+  carga(`img/${base}.webp`, (im) => { if (!hueco.querySelector("img")) hueco.appendChild(im); });
+}
+document.querySelectorAll(".cabina .f").forEach((f, i) => reponer(f, `cabina-${i + 1}`));
+document.querySelectorAll(".cap2 .ph").forEach((f, i) => reponer(f, `historia-${i + 1}`));
+reponer(document.querySelector(".etiqueta"), "vinilo");
 // Para volver a probar desde cero en tu dispositivo: abre index.html?reset
 if (location.search.includes("reset")) { try { ["bingo", "bingo2", "cupones", "cupones2"].forEach(k => localStorage.removeItem(k)); } catch (e) {} }
 const $ = (id) => document.getElementById(id);
 const REDUCE = matchMedia("(prefers-reduced-motion:reduce)").matches;
-const ph = (src, cls = "") => `<figure class="ph bn ${cls}"><img src="${src}" alt="" loading="lazy" onerror="this.remove()"></figure>`;
+const SEPS = ["-", ".", "_", " ", ""];
+const bases = (v, n) => { const out = []; [v.slug, ...(v.otros || [])].forEach(nm => SEPS.forEach(sp => { if (!v.otros && sp !== "-") return; out.push(`${nm}${sp}${n}`); })); return [...new Set(out)]; };
+const foto = (v, n) => v.fotos ? `img/${v.fotos[n - 1]}.webp` : `img/${bases(v, n)[0]}.webp`;
+const alts = (v, n) => v.fotos ? [] : bases(v, n).slice(1).map(b => "img/" + encodeURI(b));
+const ph = (src, cls = "", alt = []) => `<figure class="ph bn ${cls}"><img src="${src}"${alt.length ? ` data-alts="${alt.join("|")}"` : ""} alt="" loading="lazy" onerror="this.remove()"></figure>`;
 const unoHTML = (t) => `<span class="ovalo"></span><span class="txt">${t}</span><svg class="cn" aria-hidden="true"><use href="#rev"/></svg><svg class="cn b" aria-hidden="true"><use href="#rev"/></svg>`;
 document.querySelectorAll("[data-uno]").forEach(el => el.innerHTML = unoHTML(el.dataset.uno));
 const toggle = (el) => el.setAttribute("aria-pressed", String(el.getAttribute("aria-pressed") !== "true"));
@@ -170,7 +194,7 @@ $("viajes").innerHTML = VIAJES.map((v, i) => {
   return `<article class="viaje rv">
     <p class="k">Viaje ${String(i + 1).padStart(2, "0")} / ${String(VIAJES.length).padStart(2, "0")}</p>
     <h3 class="city">${v.lugar}</h3>
-    <div class="duo">${ph(`img/${v.slug}-1.webp`)}${ph(`img/${v.slug}-2.webp`)}</div>
+    <div class="duo">${ph(foto(v, 1), "", alts(v, 1))}${ph(foto(v, 2), "", alts(v, 2))}</div>
     <div class="bt">
       <div class="bt-top"><span>Pase de abordar</span><span>${v.vuelo}</span></div>
       <div class="bt-body">
